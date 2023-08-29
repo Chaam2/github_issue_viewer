@@ -21,6 +21,7 @@
     "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "eqeqeq": "error",
     "dot-notation": "warn",
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }
