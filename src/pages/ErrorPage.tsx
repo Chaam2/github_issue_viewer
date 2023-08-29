@@ -1,5 +1,7 @@
 import React from 'react';
 
-const IssueListPage = () => {};
+const ErrorPage = () => {
+  return <div>ErrorPage</div>;
+};
 
-export default IssueListPage;
+export default ErrorPage;

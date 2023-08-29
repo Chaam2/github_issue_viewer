@@ -1,5 +1,7 @@
 import React from 'react';
 
-const IssueDetailPage = () => {};
+const IssueDetailPage = () => {
+  return <div>IssueDetailPage</div>;
+};
 
 export default IssueDetailPage;
