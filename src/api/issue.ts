@@ -10,6 +10,6 @@ export const getIssueList = async (perPage: number, page: number): Promise<IIssu
   return await Api.get('', { params: params });
 };
 
-export const getIssueDetail = async (issueNumber: number) => {
+export const getIssueDetail = async (issueNumber: string) => {
   return await Api.get(`/${issueNumber}`);
 };
