@@ -1,12 +1,13 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { GoPerson, GoCalendar, GoComment } from 'react-icons/go';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueList } from '../api/issue';
 import { IIssueList } from '../types/issueListType';
 import { formatDate } from '../utils/formatDate';
 
 const IssueListPage = () => {
+  const navigate = useNavigate();
   const [issueList, setIssueList] = useState<IIssueList[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -24,6 +25,8 @@ const IssueListPage = () => {
       const IssueListData: IIssueList[] = await getIssueList(perPage, page);
       //@ts-ignore
       setIssueList(prev => [...prev, ...IssueListData]);
+    } catch (error) {
+      navigate('/404');
     } finally {
       setIsLoading(false);
     }

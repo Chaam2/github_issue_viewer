@@ -2,23 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { GoCalendar, GoComment, GoPerson } from 'react-icons/go';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueDetail } from '../api/issue';
 import { IIssueDetail } from '../types/issueDetailType';
 import { formatDate } from '../utils/formatDate';
 
 const IssueDetailPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
   const issueNumber = currentPath.split('/')[2];
-
   const [issueDetail, setIssueDetail] = useState<IIssueDetail>();
 
   const getIssueDetailData = async () => {
-    //@ts-ignore
-    const IssueDetailData: IIssueDetail = await getIssueDetail(issueNumber);
-    setIssueDetail(IssueDetailData);
+    try {
+      //@ts-ignore
+      const IssueDetailData: IIssueDetail = await getIssueDetail(issueNumber);
+      setIssueDetail(IssueDetailData);
+    } catch (error) {
+      navigate('/404');
+    }
   };
   useEffect(() => {
     getIssueDetailData();
