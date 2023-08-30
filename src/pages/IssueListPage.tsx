@@ -5,13 +5,19 @@ import { IIssueList } from '../types/issueListType';
 
 const IssueListPage = () => {
   const [issueList, setIssueList] = useState<IIssueList[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getIssueListData = async () => {
-    const perPage = 20;
-    const page = 1;
-    //@ts-ignore
-    const IssueListData: IIssueList[] = await getIssueList(perPage, page);
-    setIssueList(IssueListData);
+    setIsLoading(true);
+    try {
+      const perPage = 20;
+      const page = 1;
+      //@ts-ignore
+      const IssueListData: IIssueList[] = await getIssueList(perPage, page);
+      setIssueList(IssueListData);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -20,6 +26,7 @@ const IssueListPage = () => {
 
   return (
     <ul>
+      {isLoading && <div>데이터 로딩중...</div>}
       {issueList
         ? issueList.map((issue, index) => {
             return (
