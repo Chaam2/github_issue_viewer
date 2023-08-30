@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoCalendar, GoComment, GoPerson } from 'react-icons/go';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueDetail } from '../api/issue';
@@ -23,31 +25,37 @@ const IssueDetailPage = () => {
 
   return (
     <IssueContainer>
-      <IssueHeader>
-        <h2># {issueDetail?.number}</h2>
-        <h1>{issueDetail?.title}</h1>
-        <div>
-          <span>
-            <GoPerson />
-            {issueDetail?.user.login}
-          </span>
-          <span>
-            <GoCalendar />
-            {issueDetail?.created_at}
-          </span>
-          <span>
-            <GoComment />
-            {issueDetail?.comments}
-          </span>
-        </div>
-      </IssueHeader>
-      <IssueBodyContainer>
-        <Profile src={issueDetail?.user.avatar_url} alt="user image" />
-        <IssueBody>
-          <div>{issueDetail?.user.login}</div>
-          {issueDetail?.body}
-        </IssueBody>
-      </IssueBodyContainer>
+      {issueDetail && (
+        <>
+          <IssueHeader>
+            <h2># {issueDetail.number}</h2>
+            <h1>{issueDetail.title}</h1>
+            <div>
+              <span>
+                <GoPerson />
+                {issueDetail.user.login}
+              </span>
+              <span>
+                <GoCalendar />
+                {issueDetail.created_at}
+              </span>
+              <span>
+                <GoComment />
+                {issueDetail.comments}
+              </span>
+            </div>
+          </IssueHeader>
+          <IssueBodyContainer>
+            <Profile src={issueDetail.user.avatar_url} alt="user image" />
+            <IssueBody>
+              <span>{issueDetail?.user.login}</span>
+              <div>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{issueDetail.body}</ReactMarkdown>
+              </div>
+            </IssueBody>
+          </IssueBodyContainer>
+        </>
+      )}
     </IssueContainer>
   );
 };
@@ -66,12 +74,12 @@ const IssueHeader = styled.div`
     font-size: 1.2rem;
     font-weight: 400;
     color: #888888;
-    margin-bottom: 8px;
+    margin: 0 0 8px 0;
   }
   h1 {
     font-size: 2rem;
     font-weight: 400;
-    margin-bottom: 8px;
+    margin: 0 0 8px 0;
   }
   div {
     display: flex;
@@ -98,19 +106,23 @@ const IssueBody = styled.div`
   border-radius: 6px;
   position: relative;
 
-  div {
+  span {
+    display: block;
     border-radius: 6px 6px 0 0;
     background-color: #f6f8fa;
     border-bottom: 1px solid #d0d7de;
-    padding: 8px;
+    padding: 8px 16px;
     font-weight: bold;
+  }
+  div {
+    padding: 8px 16px;
   }
   ::before {
     content: '';
     position: absolute;
     top: 8px;
-    left: -10px;
-    border-right: 10px solid #d0d7de88;
+    left: -8px;
+    border-right: 8px solid #d0d7de88;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
   }
