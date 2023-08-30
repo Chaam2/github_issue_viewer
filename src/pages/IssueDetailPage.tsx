@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { GoCalendar, GoComment, GoPerson } from 'react-icons/go';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueDetail } from '../api/issue';
 import { IIssueDetail } from '../types/issueDetailType';
-import { formatDate } from '../utils/formatDate';
+import IssueHeader from '../components/IssueHeader';
 
 const IssueDetailPage = () => {
   const navigate = useNavigate();
@@ -32,28 +31,13 @@ const IssueDetailPage = () => {
     <IssueContainer>
       {issueDetail && (
         <>
-          <IssueHeader>
-            <h2># {issueDetail.number}</h2>
-            <h1>{issueDetail.title}</h1>
-            <div>
-              <span>
-                <GoPerson />
-                {issueDetail.user.login}
-              </span>
-              <span>
-                <GoCalendar />
-                {formatDate(issueDetail.created_at)}
-              </span>
-              <span>
-                <GoComment />
-                {issueDetail.comments}
-              </span>
-            </div>
-          </IssueHeader>
+          <IssueHeaderContainer>
+            <IssueHeader issue={issueDetail} />
+          </IssueHeaderContainer>
           <IssueBodyContainer>
             <Profile src={issueDetail.user.avatar_url} alt="user image" />
             <IssueBody>
-              <span>{issueDetail?.user.login}</span>
+              <span>{issueDetail.user.login}</span>
               <div>
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{issueDetail.body}</ReactMarkdown>
               </div>
@@ -73,32 +57,9 @@ const IssueContainer = styled.div`
   margin: 0 auto;
 `;
 
-const IssueHeader = styled.div`
+const IssueHeaderContainer = styled.div`
   border-bottom: 1px solid #d0d7deaa;
-  h2 {
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #888888;
-    margin: 0 0 8px 0;
-  }
-  h1 {
-    font-size: 2rem;
-    font-weight: 400;
-    margin: 0 0 8px 0;
-  }
-  div {
-    display: flex;
-    gap: 8px;
-
-    span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.9rem;
-      color: #888888;
-    }
-    margin-bottom: 16px;
-  }
+  padding-bottom: 16px;
 `;
 const IssueBodyContainer = styled.div`
   display: flex;

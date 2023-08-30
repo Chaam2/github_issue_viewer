@@ -1,10 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { GoPerson, GoCalendar, GoComment } from 'react-icons/go';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueList } from '../api/issue';
+import IssueHeader from '../components/IssueHeader';
 import { IIssueList } from '../types/issueListType';
-import { formatDate } from '../utils/formatDate';
 
 const IssueListPage = () => {
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const IssueListPage = () => {
       const perPage = 20;
       //@ts-ignore
       const IssueListData: IIssueList[] = await getIssueList(perPage, page);
-      //@ts-ignore
       setIssueList(prev => [...prev, ...IssueListData]);
     } catch (error) {
       navigate('/404');
@@ -74,22 +72,7 @@ const IssueListPage = () => {
               )}
               <IssueLi>
                 <Link to={`/issue/${issue.number}`}>
-                  <h2># {issue.number}</h2>
-                  <h1>{issue.title}</h1>
-                  <div>
-                    <span>
-                      <GoPerson />
-                      {issue.user.login}
-                    </span>
-                    <span>
-                      <GoCalendar />
-                      {formatDate(issue.created_at)}
-                    </span>
-                    <span>
-                      <GoComment />
-                      {issue.comments}
-                    </span>
-                  </div>
+                  <IssueHeader issue={issue} />
                 </Link>
               </IssueLi>
             </Fragment>
@@ -130,29 +113,6 @@ const Ad = styled.li`
 const IssueLi = styled.li`
   border-bottom: 1px solid #d0d7deaa;
   padding: 24px;
-  h2 {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #888888;
-    margin: 0 0 8px 0;
-  }
-  h1 {
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin: 0 0 8px 0;
-  }
-  div {
-    display: flex;
-    gap: 8px;
-
-    span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.9rem;
-      color: #888888;
-    }
-  }
 `;
 
 const Spinner = styled.img`
