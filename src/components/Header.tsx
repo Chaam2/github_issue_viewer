@@ -19,13 +19,13 @@ const Header = () => {
 
   return (
     <Nav>
-      <StyledLink to={`${repository?.html_url}`}>
+      <StyledLink to="/">
         <Logo src={repository?.owner.avatar_url} alt="repository image" />
         <span>{repository?.owner.login}</span> / <strong>{repository?.name}</strong>
       </StyledLink>
       <Div>
         <GoIssueOpened />
-        {repository?.open_issues_count} Open
+        {repository?.open_issues_count.toLocaleString()} Open
       </Div>
     </Nav>
   );
@@ -46,6 +46,7 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   gap: 8px;
+  text-decoration: none;
   strong {
     font-weight: bold;
   }
