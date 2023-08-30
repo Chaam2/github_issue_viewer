@@ -63,14 +63,14 @@ const IssueListPage = () => {
           return (
             <Fragment key={index + ':' + issue.number}>
               {index !== 0 && index % 4 === 0 && (
-                <Ad>
-                  <Link to="https://www.wanted.co.kr/">
+                <Link to="https://www.wanted.co.kr/">
+                  <Ad>
                     <img
                       src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
                       alt="광고 이미지"
                     />
-                  </Link>
-                </Ad>
+                  </Ad>
+                </Link>
               )}
               <IssueLi>
                 <Link to={`/issue/${issue.number}`}>
