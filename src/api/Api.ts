@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: 'https://api.github.com/repos/facebook/react/issues',
+  baseURL: 'https://api.github.com/repos/facebook/react',
 });
 
 Api.interceptors.request.use(async config => {

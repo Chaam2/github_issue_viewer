@@ -1,3 +1,4 @@
+import { IIssueDetail } from '../types/issueDetailType';
 import { IGetIssueListParams, IIssueList } from '../types/issueListType';
 import Api from './Api';
 
@@ -7,9 +8,9 @@ export const getIssueList = async (perPage: number, page: number): Promise<IIssu
     per_page: perPage,
     page: page,
   };
-  return await Api.get('', { params: params });
+  return await Api.get('/issues', { params: params });
 };
 
-export const getIssueDetail = async (issueNumber: string) => {
-  return await Api.get(`/${issueNumber}`);
+export const getIssueDetail = async (issueNumber: string): Promise<IIssueDetail> => {
+  return await Api.get(`/issues/${issueNumber}`);
 };
