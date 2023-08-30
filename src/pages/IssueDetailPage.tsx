@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueDetail } from '../api/issue';
 import { IIssueDetail } from '../types/issueDetailType';
+import { formatDate } from '../utils/formatDate';
 
 const IssueDetailPage = () => {
   const location = useLocation();
@@ -37,7 +38,7 @@ const IssueDetailPage = () => {
               </span>
               <span>
                 <GoCalendar />
-                {issueDetail.created_at}
+                {formatDate(issueDetail.created_at)}
               </span>
               <span>
                 <GoComment />
