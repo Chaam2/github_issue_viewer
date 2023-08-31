@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
 import { styled } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { getIssueList } from '../api/issue';
-import IssueHeader from '../components/IssueHeader';
 import { IIssueList } from '../types/issueType';
+import IssueListItem from '../components/IssueListItem';
 
 const IssueListPage = () => {
   const navigate = useNavigate();
@@ -56,28 +56,7 @@ const IssueListPage = () => {
 
   return (
     <IssueUl>
-      {issueList.length > 0 &&
-        issueList.map((issue, index) => {
-          return (
-            <Fragment key={index + ':' + issue.number}>
-              {index !== 0 && index % 4 === 0 && (
-                <Link to="https://www.wanted.co.kr/">
-                  <Ad>
-                    <img
-                      src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100"
-                      alt="광고 이미지"
-                    />
-                  </Ad>
-                </Link>
-              )}
-              <IssueLi>
-                <Link to={`/issue/${issue.number}`}>
-                  <IssueHeader issue={issue} />
-                </Link>
-              </IssueLi>
-            </Fragment>
-          );
-        })}
+      <IssueListItem issueList={issueList} />
       {isLoading && <Spinner src="/spinner.gif" alt="spinner" />}
       {issueList.length > 0 && <div ref={pageEndRef} />}
     </IssueUl>
@@ -103,16 +82,6 @@ const IssueUl = styled.ul`
   li:hover {
     background-color: #d0d7de22;
   }
-`;
-const Ad = styled.li`
-  border-bottom: 1px solid #d0d7deaa;
-  padding: 24px;
-  display: flex;
-  justify-content: center;
-`;
-const IssueLi = styled.li`
-  border-bottom: 1px solid #d0d7deaa;
-  padding: 24px;
 `;
 
 const Spinner = styled.img`
