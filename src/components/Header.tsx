@@ -53,6 +53,7 @@ const StyledLink = styled(Link)`
 `;
 const Logo = styled.img`
   width: 36px;
+  height: 36px;
   border-radius: 100px;
   border: 1px solid #d0d7de;
 `;
