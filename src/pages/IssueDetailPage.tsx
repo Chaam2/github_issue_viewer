@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueDetail } from '../api/issue';
 import { IIssueDetail } from '../types/issueDetailType';
 import IssueHeader from '../components/IssueHeader';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const IssueDetailPage = () => {
   const navigate = useNavigate();
@@ -39,7 +38,7 @@ const IssueDetailPage = () => {
             <IssueBody>
               <span>{issueDetail.user.login}</span>
               <div>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{issueDetail.body}</ReactMarkdown>
+                <MarkdownPreview source={issueDetail.body} />
               </div>
             </IssueBody>
           </IssueBodyContainer>
