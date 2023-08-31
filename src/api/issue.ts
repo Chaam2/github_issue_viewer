@@ -1,5 +1,4 @@
-import { IIssueDetail } from '../types/issueDetailType';
-import { IGetIssueListParams, IIssueList } from '../types/issueListType';
+import { IGetIssueListParams, IIssueDetail, IIssueList } from '../types/issueType';
 import Api from './Api';
 
 export const getIssueList = async (perPage: number, page: number): Promise<IIssueList> => {

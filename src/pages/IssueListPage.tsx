@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueList } from '../api/issue';
 import IssueHeader from '../components/IssueHeader';
-import { IIssueList } from '../types/issueListType';
+import { IIssueList } from '../types/issueType';
 
 const IssueListPage = () => {
   const navigate = useNavigate();

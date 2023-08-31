@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getIssueDetail } from '../api/issue';
-import { IIssueDetail } from '../types/issueDetailType';
+import { IIssueDetail } from '../types/issueType';
 import IssueHeader from '../components/IssueHeader';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 

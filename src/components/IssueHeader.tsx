@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoPerson, GoCalendar, GoComment } from 'react-icons/go';
 import styled from 'styled-components';
-import { IIssueList } from '../types/issueListType';
+import { IIssueList } from '../types/issueType';
 import { formatDate } from '../utils/formatDate';
 
 interface IIssueHeaderProps {

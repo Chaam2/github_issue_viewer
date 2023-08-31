@@ -6,12 +6,15 @@ export interface IGetIssueListParams {
 
 export interface IIssueList {
   title: string;
-  user: User;
+  user: {
+    login: string;
+    avatar_url: string;
+  };
   created_at: string;
   comments: number;
   number: number;
 }
 
-type User = {
-  login: string;
-};
+export interface IIssueDetail extends IIssueList {
+  body: string;
+}
